@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/questao.dart';
-import 'package:projeto_perguntas/resposta.dart';
+import 'package:projeto_perguntas/questionario.dart';
+import 'package:projeto_perguntas/resultado.dart';
 
 main() {
   runApp(AppPerguntas());
@@ -31,15 +31,12 @@ class _AppPerguntasState extends State<AppPerguntas> {
     }
   ];
 
-  bool get isSelecQuestion{
+  bool get temPerguntasSelecionada {
     return _perguntasSelecionada < _perguntas.length;
   }
 
   @override
   Widget build(BuildContext context) {
-
-    List<String> respostas = isSelecQuestion ?_perguntas[_perguntasSelecionada]['respostas']: null;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -47,12 +44,11 @@ class _AppPerguntasState extends State<AppPerguntas> {
           title: Text("Perguntas"),
           centerTitle: true,
         ),
-        body: isSelecQuestion ? Column(
-          children: <Widget>[
-            Questao(_perguntas[_perguntasSelecionada]['texto']),
-            ...respostas.map((resposta) => Resposta(resposta, _responderPerguntas)).toList(),
-          ],
-        ): null,
+        body: temPerguntasSelecionada ? Questionario(
+          perguntas: _perguntas,
+          perguntasSelecionada: _perguntasSelecionada,
+          responder: _responderPerguntas,
+        ): Resultado(),
       ),
     );
   }
