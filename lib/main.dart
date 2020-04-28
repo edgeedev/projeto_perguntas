@@ -20,7 +20,13 @@ class _AppPerguntasState extends State<AppPerguntas> {
       _perguntasSelecionada++;
       _pontuacaoTotal += pontuacao;
     });
-    print(_pontuacaoTotal);
+  }
+
+  void reiniciar() {
+    setState(() {
+      _pontuacaoTotal = 0;
+      _perguntasSelecionada = 0;
+    });
   }
 
   final List<Map<String, Object>> _perguntas = [
@@ -63,7 +69,7 @@ class _AppPerguntasState extends State<AppPerguntas> {
                 perguntasSelecionada: _perguntasSelecionada,
                 responder: _responderPerguntas,
               )
-            : Resultado(),
+            : Resultado(_pontuacaoTotal, reiniciar),
       ),
     );
   }

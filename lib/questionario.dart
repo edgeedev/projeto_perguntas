@@ -30,7 +30,7 @@ class Questionario extends StatelessWidget {
         ...respostas.map((resposta) {
           return Resposta(
             resposta['texto'], 
-          ()=>responder(resposta['pontuacao'])
+          () => responder(resposta['pontuacao'])
           );
         }).toList(),
       ],
